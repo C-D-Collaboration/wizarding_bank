@@ -3,6 +3,14 @@ class Bank
   def initialize(name)
     @name = name
     @account_balance = 0
+    @initial_account = Hash.new
+  end
+
+  def add_account(credit_union, person)
+    @initial_account[credit_union.name] = person.name
+    # @initial_acount[person] = person.name
+    require "pry"; binding.pry
+    # @initial_account << credit_union
   end
 
   def open_account(person)
@@ -25,6 +33,16 @@ class Bank
       "Insufficient funds."
     else
       "#{person.name} has withdrawn #{withdrawal_amount} galleons. Balance: #{remainder}"
+    end
+  end
+
+  def transfer(person, bank, transfer_amount)
+    if transfer_amount > @account_balance
+      "Insufficient funds."
+    elsif @initial_account.empty?
+      "#{person.name} does not have an account with #{bank.name}"
+    else
+      "#{person.name} has transferred #{transfer_amount} galleons from #{@initial_account[0].name} to #{bank.name}."
     end
   end
 end
