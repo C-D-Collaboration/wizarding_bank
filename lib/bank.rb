@@ -9,7 +9,6 @@ class Bank
   def add_account(credit_union, person)
     @initial_account[credit_union.name] = person.name
     # @initial_acount[person] = person.name
-    require "pry"; binding.pry
     # @initial_account << credit_union
   end
 
@@ -42,7 +41,11 @@ class Bank
     elsif @initial_account.empty?
       "#{person.name} does not have an account with #{bank.name}"
     else
-      "#{person.name} has transferred #{transfer_amount} galleons from #{@initial_account[0].name} to #{bank.name}."
+      "#{person.name} has transferred #{transfer_amount} galleons from #{@initial_account.keys.first} to #{bank.name}."
     end
+  end
+
+  def total_cash
+    "Total Cash: #{@account_balance} galleons"
   end
 end
